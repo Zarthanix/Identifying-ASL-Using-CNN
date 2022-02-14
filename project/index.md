@@ -56,25 +56,32 @@ In this research we use two sources of datasets, the first is from kaggle which 
 
 This model shows the CNN model that we used to train the AI. The CNN takes pictures and breaks them down into smaller segments called features. It is trained to find patterns and features over the images allowing the CNN to predict an 'a', 'b', or 'c' upon the given ASL image with high accuracy. A CNN uses a convolution operation that filters every possible position the feature it collected can be matched to and attempts to find where it fits in [^10]. This process is repeated and becomes the convolution layer or in the image depicted as Conv2d + Relu. The ReLU stands for the rectified linear unit and is used as an activation function for the CNN [^11].
 
-- [] What is a Relu operation?
-ReLU operation is a rectified linear unit and is used as an activation function for the CNN, we use a Leaky ReLU in our model because it is easy to use to train the model quickly and it has a small tolerance for negatives values unlike the normal ReLU fuction.
-paperswithcode.com/method/leaky-relu
-add figure of a leaky ReLU
-- [] What is a Conv2d?
-Conv2d is a 2D Convolution layer meant for a images as it uses height and width. They build a filter across the image by recognizing the similarities of the image 
-- [] What is a BashNormalization operation?
-Batch Normalization is a process that standardizes the updates as the Convolutional process sets weights and as the neural network goes through each layer the procedure keeps adjusting to a target that never stays the same, requiring more epochs and  and reduces the time it takes to train a deep learning neural network. :Reference 12: 
-- [] what is Maxpooling operation?
-Maximum pooling is an operation the gathers the biggest number in each collection of each feature map. This provides a way to avoid over-fitting
-- [] what is Fully Connected?
-
-- [] what is Softmax operation?
-
-
 ## 4. Methodology
 
+In this research we use three sources of data-sets, the first two is from kaggle which it was already prepared but we needed more. The second is self-made data-set by take images in good lighting against a white wall, it was then cropped to 400ppi (pixels per inch) focused on the hand. The program then sets the images to gray-scale as the color is not needed for this research. Finally, the images are reduced to different resolutions for the AI to use for training
 
-In this research, we built the model using a convolution neural network (CNN) to create an AI that can recognize ASL letters ('a', 'b', and 'c'), using a collection of 282 images. The Dataset contains 94 images for each letter to train the AI's CNN. This can be expanded to allow an AI to recognize letters, words, and any expression that can be made using a still image of the hands. A CNN fits this perfectly as we can use its ability to assign importance to segments of an image and tell the difference from one another using weights and biases. With the proper training, it is able to learn and identify these characteristics [9].
+We built the model using a convolution neural network (CNN) to create an AI that can recognize ASL letters (’a’, ’b’, and ’c’), using a collection of 2,526 images. The Data-set contains 842 images for each letter to train the AI’s CNN. This can be expanded to allow an AI to recognize letters, words, and any expression that can be made using a still image of the hands. A CNN fits this perfectly as we can use its ability to assign importance to segments of an image and tell the difference from one another using weights and biases. With the proper training, it is able to learn and identify these characteristics.
+
+Keras Conv2D is a 2D Convolution Layer, this layer creates a convolution kernel that is wind with layers input which helps produce a tensor of outputs.
+
+ReLu, Rectified Linear Unit activation function that outputs the input directly if it is positive, otherwise it outputs zero. We employed the Leaky ReLu which allows for a small positive gradient when the unit is not active.
+
+Maxpooling, uses a 2 x 2 sized kernel to not lose important features of the input with strides equals to 2. Every time 2 x 2 sized kernel shifts 2 times, it reduces the size of an image by half.
+
+Flattening converts the data into a 1-dimensional array for inputting towards the next layer. It creates a singular feature vector and then is connected to the classification model.
+
+Fully Connected layer is feed forward neural networks in which the input is from the flattened 1-dimensional array and performs a linear transformation and a non-linear transformation.
+
+Linear Transformation equation
+
+Z = WT.X + b
+
+Non-Linear Transformation equation
+
+f(x) = 1/(1+e^-x)
+
+Softmax is the final layer in the neural network and will perform the operations for the model to calculate multi-class classification like in the case of the research it is used to output the label of if the model recognizes the image as an "a", "b", or "c" class.
+
 
 ## 5. Benchmark
 
@@ -86,13 +93,9 @@ The Confusion Matrix shows the results of the model after being tested on its ab
 
 ## 6. Conclusion
 
-We build a model to recognize an ASL given an image and predict the corresponding letter using a convolutional neural network. The model provides a means of 66% accuracy in classifying the ASL among the three classes 'a', 'b', and 'c'. From the given results, the letters 'a' and 'c' became the most difficult for the CNN to differentiate from each other, as shown in the confusion matrix in figure 3. We suggest that the low accuracy rate is based on similar appearing grayscale of the letters 'a' and 'c' and the lack of a larger dataset for the AI to learn from. We determine that using a larger dataset of the entire alphabet and increasing the number of examples of each letter to train the AI could improve the results. 
+We build a model to recognize an ASL given an image and identify the corresponding letter using a convolutional neural network. The model showed the best results at 75ppi running 5 epochs for an accuracy of 99% in both "a" and "b" classes then a 95% in class "c". Comparing the results shows that 2 epochs had a trend to being underfit for our data set while the 10 epochs would be overfitting for our data. Having an image size of 75ppi would leave to the program being able to learn from more important parts of the data rather than background noise and smaller unnecessary details for it to make an accurate prediction. This is seen in how moving to a higher resolution had a decreasing return on the average accuracy for the models.
 
-We found that the low accuracy can be increased by improving the resolution of the image giving the program more features to go off of in its computing to recognize the image, going from model 1 at 50 x 50 pixels to model 2 at 80 x 80 pixels there was an increase from 66% to 76% in accuracy, this in theory should improve as the resolution of the image increases from 100x 100 to 200x 200 and at the best the image's resolution would be left at the original size off 400 x 400. This is accuracy increase would be because as the resolution drops the program has less information and some of the important landmarks of the hand are lost due to the resolution of the image.
-
-- [ ] Correct formatting and grammar
-
-Future studies using a larger dataset can be applied to more complex methods than just singular letters but words from the ASL language to recreate a text to speech software based around ASL hand positioning.
+Future studies using a larger data-set can be applied to more complex methods than just singular letters but words from the ASL language to recreate a text to speech software based around ASL hand positioning.
 
 ## 7. Acknowledgments
 
